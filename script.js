@@ -13,9 +13,7 @@ function divide (a , b){
 let a = -9;
 let b = 3;
 
-
 let num1,operator,num2;
-
 
 function operate(a,o,b){
 
