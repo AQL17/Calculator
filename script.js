@@ -36,21 +36,24 @@ function operate(a,o,b){
 
 
 
-let opvalue;
 const display = document.getElementById('display');
 const btns = document.querySelectorAll("div.operators .num");
+function displayed (){
 btns.forEach((item)=>{
     item.addEventListener('click', ()=> {
         const value = item.textContent;
         display.textContent += value;
-        disvalue = display.textContent;
+        equation.first = display.textContent;
     })
 })
+}
+const clear = document.querySelector('.clear');
+    clear.addEventListener('click', ()=>{
+        display.innerText = "";
+    })
+console.log(displayed());
 const operators = document.querySelectorAll('div.operators .op');
-console.log(operators);
 operators.forEach((op)=>{
     op.addEventListener('click',()=>{
-        opvalue = op.textContent;
-        return opvalue;
     })
 })
