@@ -1,3 +1,13 @@
+const display1 = document.querySelector(".dis1");
+const btns = document.querySelectorAll("div.operators .num");
+const ops = document.querySelectorAll("div.operators .op");
+const equal = document.querySelector('.Equal');
+const clear = document.querySelector(".Clear");
+var dot = document.querySelector(".value");
+let first = 0;
+let second = 0;
+let operand;
+
 function add (a , b){
     return a + b;
 }
@@ -10,10 +20,10 @@ function multiply (a , b){
 function divide (a , b){
     return a / b;
 }
-let a = 2;
-let b = 2;
+function remainder(a,b){
+    return a % b;
+}
 
-let num1,num2;
 
 function operate(a,o,b){
 
@@ -29,31 +39,38 @@ function operate(a,o,b){
     else if(o === '/'){
         return divide(a,b)
     }
-    else{
+    else if(o === '%'){
+        return remainder(a,b);
+    }else {
         return alert("error");
     }
 }
 
 
-
-const display = document.getElementById('display');
-const btns = document.querySelectorAll("div.operators .num");
-function displayed (){
-btns.forEach((item)=>{
-    item.addEventListener('click', ()=> {
-        const value = item.textContent;
-        display.textContent += value;
-        equation.first = display.textContent;
-    })
-})
+for(let val of btns){
+    val.onclick = () => {
+            if(val.innerText === '.'){
+                val.disabled = true;
+            }
+        
+        display1.innerText += val.innerText;
+    }
 }
-const clear = document.querySelector('.clear');
-    clear.addEventListener('click', ()=>{
-        display.innerText = "";
-    })
-console.log(displayed());
-const operators = document.querySelectorAll('div.operators .op');
-operators.forEach((op)=>{
-    op.addEventListener('click',()=>{
-    })
-})
+for(let val of ops){
+    val.onclick = () => {
+        first = display1.innerText;
+        display1.innerHTML = "";
+        operand = val.innerText;
+    }
+}
+
+equal.onclick = () => {
+    second = display1.innerText;
+    display1.innerHTML = "";
+    display1.innerText = operate(+first, operand, +second);
+}
+
+clear.onclick = () =>{
+    display1.innerHTML = " ";
+    dot.disabled = false;
+}
