@@ -1,76 +1,91 @@
 const display1 = document.querySelector(".dis1");
+const display2 = document.querySelector(".dis2");
 const btns = document.querySelectorAll("div.operators .num");
 const ops = document.querySelectorAll("div.operators .op");
 const equal = document.querySelector('.Equal');
 const clear = document.querySelector(".Clear");
-var dot = document.querySelector(".value");
-let first = 0;
-let second = 0;
-let operand;
+let first = "";
+let second = "";
+let operator = "";
 
-function add (a , b){
+function add(a, b) {
     return a + b;
 }
-function subtract (a , b){
+function subtract(a, b) {
     return a - b;
 }
-function multiply (a , b){
+function multiply(a, b) {
     return a * b;
 }
-function divide (a , b){
+function divide(a, b) {
     return a / b;
 }
-function remainder(a,b){
+function remainder(a, b) {
     return a % b;
 }
 
 
-function operate(a,o,b){
+function operate(a, o, b) {
 
-    if(o === '+'){
-        return add(a,b)
+    if (o === '+') {
+        return add(a, b)
     }
-    else if(o === '-'){
-        return subtract(a,b)
+    else if (o === '-') {
+        return subtract(a, b)
     }
-    else if(o === '*'){
-        return multiply(a,b)
-    } 
-    else if(o === '/'){
-        return divide(a,b)
+    else if (o === '*') {
+        return multiply(a, b)
     }
-    else if(o === '%'){
-        return remainder(a,b);
-    }else {
+    else if (o === '/') {
+        return divide(a, b)
+    }
+    else if (o === '%') {
+        return remainder(a, b);
+    } else {
         return alert("error");
     }
 }
 
 
-for(let val of btns){
+for (let val of btns) {
     val.onclick = () => {
-            if(val.innerText === '.'){
-                val.disabled = true;
-            }
-        
-        display1.innerText += val.innerText;
+        if (operator === "") {
+            display1.innerHTML += val.innerText;
+            first = display1.innerHTML;
+        }
+        if (operator !== "") {
+            display1.innerHTML = "";
+            display2.innerHTML += val.innerText;
+            second = display2.innerHTML;
+        }
     }
 }
-for(let val of ops){
-    val.onclick = () => {
-        first = display1.innerText;
-        display1.innerHTML = "";
-        operand = val.innerText;
+for (let val of ops) {
+    val.onclick = () => {        
+        if (second !== "") {
+            display2.innerHTML = "";
+            console.log(first, operator, second);
+            first = operate(+first, operator, +second);
+            display1.innerHTML = first;
+            
+        }
+        operator = val.innerText;
+
     }
+
 }
 
 equal.onclick = () => {
-    second = display1.innerText;
-    display1.innerHTML = "";
-    display1.innerText = operate(+first, operand, +second);
+    first = operate(+first, operator, +second);
+    display1.innerHTML = first;
+    display2.innerHTML = "";
+    second = "";
 }
 
-clear.onclick = () =>{
-    display1.innerHTML = " ";
-    dot.disabled = false;
+clear.onclick = () => {
+    display1.innerHTML ="";
+    display2.innerHTML = "";
+    first = "";
+    second = "";
+    operator = "";
 }
