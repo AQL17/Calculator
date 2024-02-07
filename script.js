@@ -4,6 +4,8 @@ const btns = document.querySelectorAll("div.operators .num");
 const ops = document.querySelectorAll("div.operators .op");
 const equal = document.querySelector('.Equal');
 const clear = document.querySelector(".Clear");
+const dot = document.querySelector(".dot");
+const del = document.querySelector(".Delete")
 let first = "";
 let second = "";
 let operator = "";
@@ -37,6 +39,9 @@ function operate(a, o, b) {
         return multiply(a, b)
     }
     else if (o === '/') {
+        if(b === 0){
+            return display1.innerHTML = "Dumb";
+        }
         return divide(a, b)
     }
     else if (o === '%') {
@@ -57,6 +62,11 @@ for (let val of btns) {
             display1.innerHTML = "";
             display2.innerHTML += val.innerText;
             second = display2.innerHTML;
+        }
+        if(display1.innerHTML.includes(".") || display2.innerHTML.includes(".")){
+            dot.disabled = true;
+        }else{
+            dot.disabled = false;
         }
     }
 }
@@ -88,4 +98,9 @@ clear.onclick = () => {
     first = "";
     second = "";
     operator = "";
+    dot.disabled = false;
+}
+del.onclick = () =>{ 
+    display1.innerHTML = display1.innerHTML.slice(0,-1);
+    display2.innerHTML = display2.innerHTML.slice(0,-1);
 }

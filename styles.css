@@ -1,7 +1,15 @@
+html{
+    height: 100%;
+    width: 100%;
+}
+
 body{
-    background-color:aliceblue;
+    height: 100%;
+    width: 100%;
+    background-color: lemonchiffon;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 #container{
     height:525px;
@@ -18,7 +26,7 @@ body{
     height: 100px;
     width: 100%;
     margin-bottom: 20px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Orbitron';
     font-size: 5em;
     text-align: end;
 }
@@ -26,6 +34,9 @@ body{
     display: flex;
     justify-content:center;
     align-items: center;
+}
+.operators .op{
+    background-color:red;
 }
 .operators button{
     display: flex;
@@ -38,7 +49,11 @@ body{
     background-color: orange;
     border: 2px solid black;
     border-radius: 10px;
-    font-size: 2em;
+    font-family: 'Orbitron';
+    font-size: 2.5em;
+}
+.operators .Equal{
+    flex-grow: 4;
 }
 button:hover{
     background-color: white;
