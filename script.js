@@ -100,7 +100,3 @@ clear.onclick = () => {
     operator = "";
     dot.disabled = false;
 }
-del.onclick = () =>{ 
-    display1.innerHTML = display1.innerHTML.slice(0,-1);
-    display2.innerHTML = display2.innerHTML.slice(0,-1);
-}
